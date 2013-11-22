@@ -25,8 +25,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface REMenuContainerView : UIView
+@interface REMenuContainerView : UIScrollView
 
-@property (strong, nonatomic) UINavigationBar *navigationBar;
+@property (strong, readwrite, nonatomic) UINavigationBar *navigationBar;
+@property (assign, readwrite, nonatomic) BOOL appearsBehindNavigationBar;
 
 @end

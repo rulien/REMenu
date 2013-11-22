@@ -1,5 +1,5 @@
 //
-// REMenuItem.h
+// RECommonFunctions.m
 // REMenu
 //
 // Copyright (c) 2013 Roman Efimov (https://github.com/romaonthego)
@@ -23,22 +23,23 @@
 // THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
+#import "RECommonFunctions.h"
 
-@interface REMenuItem : NSObject
-
-@property (copy, readwrite, nonatomic) NSString *title;
-@property (copy, readwrite, nonatomic) NSString *subtitle;
-@property (copy, readwrite, nonatomic) NSString *badge;
-@property (strong, readwrite, nonatomic) UIImage *image;
-@property (strong, readwrite, nonatomic) UIImage *higlightedImage;
-@property (copy, readwrite, nonatomic) void (^action)(REMenuItem *item);
-@property (assign, readwrite, nonatomic) NSInteger tag;
-@property (strong, readwrite, nonatomic) UIView *customView;
-
-- (id)initWithTitle:(NSString *)title image:(UIImage *)image highlightedImage:(UIImage *)higlightedImage action:(void (^)(REMenuItem *item))action;
-- (id)initWithTitle:(NSString *)title subtitle:(NSString *)subtitle image:(UIImage *)image highlightedImage:(UIImage *)higlightedImage action:(void (^)(REMenuItem *item))action;
-- (id)initWithCustomView:(UIView *)customView action:(void (^)(REMenuItem *item))action;
-- (id)initWithCustomView:(UIView *)customView;
-
-@end
+BOOL REUIKitIsFlatMode()
+{
+    static BOOL isUIKitFlatMode = NO;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        if (floor(NSFoundationVersionNumber) > 993.0) {
+            // If your app is running in legacy mode, tintColor will be nil - else it must be set to some color.
+            if (UIApplication.sharedApplication.keyWindow &&
+                [UIApplication.sharedApplication.delegate respondsToSelector:@selector(window)]) {
+                isUIKitFlatMode = [UIApplication.sharedApplication.delegate.window performSelector:@selector(tintColor)] != nil;
+            } else {
+                // Possible that we're called early on (e.g. when used in a Storyboard). Adapt and use a temporary window.
+                isUIKitFlatMode = [[UIWindow new] performSelector:@selector(tintColor)] != nil;
+            }
+        }
+    });
+    return isUIKitFlatMode;
+}
