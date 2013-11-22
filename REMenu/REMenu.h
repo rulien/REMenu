@@ -90,5 +90,6 @@
 - (void)setNeedsLayout;
 - (void)closeWithCompletion:(void (^)(void))completion;
 - (void)close;
+- (void)setContainerView:(REMenuContainerView *)containerView;
 
 @end

@@ -108,12 +108,18 @@
     
     // Create views
     //
-    _containerView = [[REMenuContainerView alloc] init];
     _menuView = [[UIView alloc] init];
     _menuWrapperView = [[UIView alloc] init];
-    
-    _containerView.clipsToBounds = YES;
-    _containerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    if(!_containerView) {
+		_containerView = [[REMenuContainerView alloc] init];
+	    _containerView.clipsToBounds = YES;
+	    _containerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+	    _containerView.frame = CGRectMake(rect.origin.x,
+	                                      rect.origin.y,
+	                                      rect.size.width,
+	                                      rect.size.height);
+	}
+
     
     _menuView.backgroundColor = self.backgroundColor;
     _menuView.layer.cornerRadius = self.cornerRadius;
@@ -182,10 +188,7 @@
                                         self.combinedHeight);
     _menuView.frame = _menuWrapperView.bounds;
     
-    _containerView.frame = CGRectMake(rect.origin.x,
-                                      rect.origin.y,
-                                      rect.size.width,
-                                      rect.size.height);
+    self.containerView.contentSize = rect.size;
     
     _backgroundButton.frame = _containerView.bounds;
     
@@ -288,6 +291,12 @@
     UIGraphicsEndImageContext();
     
     return [UIImage imageWithCGImage:outputImage.CGImage scale:2.0 orientation:UIImageOrientationUp];
+}
+
+#pragma mark - Custom setters
+
+- (void)setContainerView:(REMenuContainerView *)containerView {
+    _containerView = containerView;
 }
 
 @end
