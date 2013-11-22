@@ -188,7 +188,7 @@
                                         self.combinedHeight);
     _menuView.frame = _menuWrapperView.bounds;
     
-    self.containerView.contentSize = rect.size;
+    _containerView.contentSize = rect.size;
     
     _backgroundButton.frame = _containerView.bounds;
     
