@@ -120,6 +120,9 @@
 	                                      rect.size.height);
 	}
 
+    _containerView.bounces = NO;
+    _containerView.showsHorizontalScrollIndicator = NO;
+    _containerView.showsVerticalScrollIndicator = NO;
     
     _menuView.backgroundColor = self.backgroundColor;
     _menuView.layer.cornerRadius = self.cornerRadius;
