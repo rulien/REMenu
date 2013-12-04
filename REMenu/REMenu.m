@@ -102,6 +102,12 @@
     return self;
 }
 
+-(void)dealloc{
+    if ([_containerView superview]) {
+        [_containerView removeFromSuperview];
+    }
+}
+
 - (void)showFromRect:(CGRect)rect inView:(UIView *)view
 {
     _isOpen = YES;
