@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.homepage    = 'https://github.com/romaonthego/REMenu'
   s.summary     = 'Dropdown menu inspired by Vine.'
   s.source      = { :git => 'https://github.com/romaonthego/REMenu.git',
-                    :tag => '1.3.3' }
+                    :tag => '1.3.3_agens' }
   s.license     = { :type => "MIT", :file => "LICENSE" }
 
   s.platform = :ios, '5.0'
